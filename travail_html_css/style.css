@@ -1,0 +1,99 @@
+body {
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+h1, h2 {
+    color: #2c3e50;
+}
+
+header {
+    background-color: #383e45;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+.menu li {
+    margin: 0 15px;
+    padding: 5px 10px;
+    background-color: #5181a2;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.menu li:hover {
+    background-color: #5182a28a;
+}
+.menu a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.intro h1 {
+    text-align: center;
+    font-size: 2.7rem;
+    margin-bottom: 10px;
+}
+.intro p {
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.sections {
+    text-align: center;
+}
+.sections li {
+    display: inline-block;
+    margin: 10px 20px;
+    font-size: 1.1rem;
+    color: #34495e;
+}
+
+.events h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.events ul {
+    list-style: none;
+    padding: 0;
+}
+
+.events li {
+    margin: 10px;
+    padding: 10px;
+    background: #ecf0f1;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+}
+
+footer {
+    background-color: #34495e;
+    color: rgb(232, 221, 221);
+    text-align: center;
+    padding: 15px;
+}
+
+.icons .fa{
+    margin: 13px;
+    cursor: pointer;
+}

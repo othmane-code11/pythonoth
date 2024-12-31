@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="les_images/Logo_ofppt.webp">
+    <title>Inscription à l'école</title>
+    <style>
+        form {
+            max-width: 700px;
+            margin-bottom: 30px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        div {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #ddd; 
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #c0bcbc;
+        }
+        table {
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <center>
+    <h1>Formulaire d'inscription</h1>
+    <form>
+        <label>Prénom et Nom :</label>
+        <input type="text" placeholder="Ex: othmane ezz">
+
+        <label>Adresse Email :</label>
+        <input type="email" placeholder="Ex: othmaneezz@example.com">
+
+        <label>Mot de passe :</label>
+        <input type="password" placeholder="mot de passe">
+
+        <h3>Niveau scolaire :</h3>
+        <div>
+            <label>Primaire</label>
+            <input type="radio" name="a" value="Primaire"> 
+            <label>Collège</label>
+            <input type="radio" name="a" value="Collège"> 
+            <label>Lycée</label>
+            <input type="radio" name="a" value="Lycée"> 
+            
+        </div>
+
+        <h3>Matière préférée :</h3>
+        <select>
+                <option value="Sciences">Sciences</option>
+                <option value="Mathématiques">Mathématiques</option>
+                <option value="Physique">Physique</option>
+                <option value="Littérature">Littérature</option>
+                <option value="Français">Français</option>
+                <option value="Histoire">Histoire</option>
+        </select>
+
+        <h3>Activités parascolaires :</h3>
+        <div>
+            <label>Sport</label>
+            <input type="checkbox" name=""> 
+            <label> Musique </label>
+            <input type="checkbox" name="">
+            <label>Théatre</label>
+            <input type="checkbox" name=""> 
+        </div>
+
+        <label>Message ou Commentaires :</label>
+        <textarea placeholder="Écrivez ici..."></textarea>
+
+        <button type="submit">S'inscrire</button>
+    </form>
+
+    <h2>Élèves inscrits</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Niveau</th>
+                <th>Matière préférée</th>
+                <th>Activités</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>othmane ezz</td>
+                <td>othmaneezz@example.com</td>
+                <td>Collège</td>
+                <td>Mathématiques</td>
+                <td>Sport</td>
+            </tr>
+            <tr>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+            </tr>
+        </tbody>
+    </table>
+</center>
+</body>
+</html>

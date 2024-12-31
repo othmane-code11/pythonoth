@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/png" href="les_images/Logo_ofppt.webp">
+    <title>Gestion de Classe</title>
+    <style>
+        body {
+            margin: 20px;
+            line-height: 1.6;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;  
+            align-items: center;
+        }
+        header, div, footer {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+        }
+        table th, table td {
+            border: 1px solid #c4b4b4;
+            padding: 10px;
+        }
+        table th {
+            background-color: #f4f4f4;
+        }
+        
+        form label, form button {
+            display: block;
+            margin: 10px 0;
+        }
+        .icons .fa{
+            margin: 0 13px;
+            cursor: pointer;
+        }
+        .excellent {
+            color: green;
+            font-weight: bold;
+        }
+        .passable {
+            color: orange;
+            font-weight: bold;
+        }
+        .insuffisant {
+            color: red;
+            font-weight: bold;
+        }
+        ul li {
+            margin: 10px;
+        }
+        button {
+            margin: 25px 0 ;
+            padding: 10px 20px;
+            background-color: #ddd; 
+            border: none;
+            border-radius: 25px;
+        }
+        button:hover {
+            background-color: #c0bcbc;
+            cursor: pointer;
+        }
+        .btn {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <center>
+    <header>
+        <img src="les_images/Logo_ofppt.webp" height="100px" width="100px" style="border-radius: 100px;">
+        <h1>Gestion de Classe</h1>
+        <button><a href="inscription.html" target="_blank" style="text-decoration: none; color: black;">inscription</a></button>
+    </header>
+    
+    <section>
+        <h2>À propos de cette page</h2>
+        <p>Cette page a pour but de fournir une interface pour gérer les informations liées à une classe, comme la liste des élèves et leur note...</p>
+        <img src="les_images/asian-teacher-leader-multiethnic-diverse-600nw-2010062099.webp"  width="90%" style="border-radius: 10px;">
+    </section>
+    
+    <section>
+        <h2>Fonctionnalités</h2>
+        <ul type="none">
+            <li>Afficher la liste des élèves inscrits.</li>
+            <li>Permettre aux utilisateurs de se connecter pour gérer les données.</li>
+            <li>Affiche le statut des élèves en fonction de leur moyenne.</li>
+            <li>Offrir des ressources éducatives externes.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Connexion</h2>
+        <form>
+            <label >Nom d'utilisateur :</label>
+            <input type="text" placeholder="nom d'utulisateur :">
+            <label>Mot de passe :</label>
+            <input type="password" placeholder="mot de passe :">
+            <button class="btn" type="submit">Se connecter</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>Liste des Élèves</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Age</th>
+                    <th>Classe</th>
+                    <th>Moyenne</th>
+                    <th>Statut</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>HASAN</td>
+                    <td>HASAN</td>
+                    <td>21</td>
+                    <td>DD102</td>
+                    <td>16</td>
+                    <td class="excellent">Excellent</td>
+                </tr>
+                <tr>
+                    <td>SAMIR</td>
+                    <td>SAMIR</td>
+                    <td>19</td>
+                    <td>DD102</td>
+                    <td>12.5</td>
+                    <td class="passable">Passable</td>
+                </tr>
+                <tr>
+                    <td>ALI</td>
+                    <td>ALI</td>
+                    <td>20</td>
+                    <td>DD102</td>
+                    <td>9</td>
+                    <td class="insuffisant">Insuffisant</td>
+                </tr>
+                <tr>
+                    <td>BADR</td>
+                    <td>BADR</td>
+                    <td>18</td>
+                    <td>DD102</td>
+                    <td>17</td>
+                    <td class="excellent">Excellent</td>
+                </tr>
+                <tr>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>Statistiques</h2>
+        <p>Pourcentage des élèves "<u>Excellents</u>" est : <strong>50%</strong></p>
+    </section>
+    <div>
+        <h2 >Notre liens utiles</h2>
+        <ul style="margin-right: 40px;" type="none">
+            <li><a href="">À propos</a></li>
+            <li><a href="">Fonctionnalités</a></li>
+            <li><a href="">Liste des élèves</a></li>
+            <li><a href="https://www.men.gov.ma/Fr/Pages/Accueil.aspx" target="_blank">Ministère de l'Éducation</a></li>
+            <li><a href="https://www.ofppt.ma/" target="_blank">Notre site</a></li>
+        </ul>
+    </div>
+
+    <footer>
+        <div class="icons">
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-linkedin"></i>
+        </div>
+        <P> Made with <i class="fa fa-heart-o"></i> by Othmane <br> all rights reserved 2024</P>
+    </footer>
+</center>
+</body>
+</html>

@@ -1,0 +1,42 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+header{
+    background-color: rgb(48, 45, 45);
+    border: solid;
+    color: aliceblue;
+    border-color: rgb(48, 45, 45);
+}
+div.main{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgb(185, 173, 173);
+}
+div.main div{
+    background-color: rgb(124, 122, 122) ;
+    margin: 60px;
+    height: 200px;
+    width: 200px;
+    padding: 40px;
+    border: solid;
+    border-right-width: 10px;
+    border-left-width: 10px;
+    border-bottom-width: 80px ;
+    border-top-width: 10px;
+    border-color:white ;
+    font-size: 50px;
+    align-content: center ;
+    color: rgb(78, 74, 74);
+}
+div.main div p.content{
+    font-size: 20px;
+    position: relative;
+    top: 150px; 
+    left: 20px; 
+    color: black;
+}
+.main div .lwast {
+    margin: 0;
+    padding: 0;
+}
