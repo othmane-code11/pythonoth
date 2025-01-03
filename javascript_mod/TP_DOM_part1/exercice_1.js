@@ -1,5 +1,5 @@
 let body = document.querySelector('body');
-body.style.backgroundColor = '#f4f4f4'
+body.style.backgroundColor = '#DCDCDC'
 body.style.margin = 0;
 //header
 let header = document.createElement('header');

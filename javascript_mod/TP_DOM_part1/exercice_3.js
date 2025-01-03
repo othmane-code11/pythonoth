@@ -1,5 +1,6 @@
 // Créer un élément <div>
 const element = document.createElement('div');
+element.id = 'monDiv';
 element.textContent = "Texte initial";
 element.style.padding = "20px";
 element.style.textAlign = "center";

@@ -10,7 +10,7 @@ container.appendChild(title);
 
 // Ajouter un paragraphe
 const paragraph = document.createElement('p');
-paragraph.textContent = 'Texte modifié';
+paragraph.textContent = 'Bienvenue sur ma page dynamique';
 container.appendChild(paragraph);
 
 // Ajouter une liste
@@ -27,7 +27,7 @@ const addButton = document.createElement('button');
 addButton.textContent = 'Ajouter un item';
 addButton.onclick = () => {
     const newItem = document.createElement('li');
-    newItem.textContent = 'Nouvel item';
+    newItem.textContent = 'Item ajouté';
     list.appendChild(newItem);
 };
 container.appendChild(addButton);
@@ -44,16 +44,16 @@ container.appendChild(removeButton);
 
 // Bouton pour changer le texte
 const changeTextButton = document.createElement('button');
-changeTextButton.textContent = 'Modifier le texte';
+changeTextButton.textContent = 'Changer le texte';
 changeTextButton.onclick = () => {
-    paragraph.textContent = 'Texte mis à jour!';
+    paragraph.textContent = 'Texte modifié';
 };
 container.appendChild(changeTextButton);
 
 // Bouton pour changer la couleur de fond
 const changeBgButton = document.createElement('button');
-changeBgButton.textContent = 'Changer la couleur';
+changeBgButton.textContent = 'Changer la couleur de fond';
 changeBgButton.onclick = () => {
-    container.style.backgroundColor = 'lightblue';
+    container.style.backgroundColor = 'aqua';
 };
 container.appendChild(changeBgButton);

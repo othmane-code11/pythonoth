@@ -5,12 +5,12 @@ const article = {
 }
 
 while (article.quantite >= 0) {
-    console.log(article.quantite);
     if (article.quantite == 0) {
         console.log('pas de stock à décrémentrer');
         break;
     }
     else {
+        console.log(article.quantite);
         article.quantite -= 1;
     }
 }
