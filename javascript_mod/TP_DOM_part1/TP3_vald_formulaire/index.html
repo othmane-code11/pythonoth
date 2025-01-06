@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP3 : Validation de Formulaire</title>
+    <style>
+        button {
+            background-color: rgb(31, 98, 255); 
+            color: aliceblue;
+            border-radius: 5px;
+            border: none;
+            padding: 5px 10px;
+        }
+        h1, h2 {
+            color: rgb(31, 98, 255);
+            text-align: center;
+        }
+        .hdaba3dhom {
+            display: flex;
+        }
+        .hdaba3dhom span {
+            margin-left: 10px;
+            padding-top: 2px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Formulation de Réservation de tickets</h1>
+    <form id="reservationForm">
+        <fieldset>
+            <legend>Identification</legend>
+            <label for="nom">Nom:</label>
+            <input type="text" id="nom" placeholder="Veuillez saisir votre nom: "><br><br>
+            <p>Ville de départ: Casablanca</p><br>
+            <label for="villeArrivee">Ville d'arrivée:</label>
+            <select id="villeArrivee">
+                <option value="Safi">Safi</option>
+                <option value="Marrakech">Marrakech</option>
+                <option value="Mohammédia">Mohammédia</option>
+                <option value="Rabat">Rabat</option>
+            </select><br><br>
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend>Catégorie</legend>
+            <input type="radio" name="classe" value="2eme" checked> 2ème Classe <br>
+            <input type="radio" name="classe" value="1ere"> 1ère Classe<br><br>
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend>Nombre de Passagers</legend>
+            <label for="nbPassagers">Nombre de passagers:</label>
+            <input type="number" id="nbPassagers" min="1" required><br><br>
+            <div class="hdaba3dhom">
+                <button type="button" onclick="calculer()">Calculer</button>
+                <span id="prixTotal"></span>
+            </div>
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend>Mode de Paiement</legend>
+            <label>paiement par:</label>
+            <select id="modePaiement">
+                <option value="Carte Bancaire">Carte Bancaire</option>
+                <option value="Espèces">Espèces</option>
+            </select><br><br>
+        </fieldset>
+        
+
+        <button type="button" onclick="validerForm()">Valider</button>
+        <button type="button" onclick="Recapitulatif()">Récapitulatif</button>
+    </form>
+
+    <h2>Récapitulatif</h2>
+    <div id="recapitulatif"></div>
+
+    <script src="formulaire.js"></script>
+</body>
+</html>
