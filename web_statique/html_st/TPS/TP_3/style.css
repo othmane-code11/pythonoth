@@ -8,6 +8,9 @@ header{
     color: aliceblue;
     border-color: rgb(48, 45, 45);
 }
+header h1 {
+    text-align: center;
+}
 div.main{
     display: flex;
     flex-wrap: wrap;
@@ -24,16 +27,16 @@ div.main div{
     border-left-width: 10px;
     border-bottom-width: 80px ;
     border-top-width: 10px;
-    border-color:white ;
+    border-color:white;
     font-size: 50px;
-    align-content: center ;
+    align-content: center;
     color: rgb(78, 74, 74);
 }
 div.main div p.content{
     font-size: 20px;
     position: relative;
-    top: 150px; 
-    left: 20px; 
+    top: 150px;
+    left: 20px;
     color: black;
 }
 .main div .lwast {
