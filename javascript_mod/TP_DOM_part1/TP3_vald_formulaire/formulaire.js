@@ -1,8 +1,8 @@
 const tarifs = {
-    Safi: 90,
-    Marrakech: 120,
-    Mohammédia: 20,
-    Rabat: 60
+    'Safi': 90,
+    'Marrakech': 120,
+    'Mohammédia': 20,
+    'Rabat': 60
 };
 
 function validerForm() {
@@ -14,7 +14,7 @@ function validerForm() {
         return false;
     }
 
-    if (nbPassagers <= 0) {
+    if (nbPassagers <= 0 || !nbPassagers) {
         alert('Le nombre de passagers doit être strictement positif.');
         return false;
     }
