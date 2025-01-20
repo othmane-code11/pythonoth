@@ -70,9 +70,9 @@ function updateClientsTable() {
 function deleteClient(index) {
   if (confirm('Etes-vous sur ?')) {
     clients.splice(index, 1);
+    updateClientsTable();
+    updateClientsSelect();
   }
-  updateClientsTable();
-  updateClientsSelect();
 }
 // Remplir les section de reservation
 const clientSelects = document.getElementById('clientSelect');
@@ -112,12 +112,15 @@ reservationForm.addEventListener('submit', (e) => {
   document.getElementById('totalPrice').textContent = `${prix.toFixed(2)} DH😊`
 
   // Ajouter le ticket
+  let d = new Date;
+  let dformat = [d.getDate(), d.getMonth()+1, d.getFullYear()].join('/')+' '+
+              [d.getHours(), d.getMinutes(), d.getSeconds()].join(':');
   const ticket = {
     client: clients[clientIndex],
     destination,
     classe,
     prix: prix.toFixed(2),
-    date: new Date().toLocaleDateString()
+    date: dformat
   };
   updateTicketsTable(ticket);
 });

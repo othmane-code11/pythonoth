@@ -216,3 +216,7 @@ footer {
     color: var(--background-color);
     margin-top: 2rem;
 }
+
+#price {
+    display: flex;
+}

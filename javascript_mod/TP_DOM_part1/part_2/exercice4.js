@@ -19,7 +19,7 @@ const addImage = () => {
     img.src = `images.jpeg`;
     img.alt = `Image ${imageCounter}`;
     img.style.width = '150px';
-    img.style.height = '150px';
+    img.style.height = 'auto';
 
     const figcaption = document.createElement('figcaption');
     figcaption.textContent = `Image ${imageCounter}`;
@@ -42,7 +42,7 @@ const changeImageSize = () => {
     const images = galleryContainer.querySelectorAll('img');
     images.forEach(img => {
         img.style.width = '200px';
-        img.style.height = '200px';
+        img.style.height = 'auto';
     });
 };
 

@@ -3,7 +3,7 @@ let prixProduits = [3, 5, 2];
 let somme = 0;
 let m;
 for (let i = 0; i < prixProduits.length; i++) {
-    somme += parseInt(prixProduits[i]) ;
+    somme += parseInt(prixProduits[i]);
 }
 m = somme / prixProduits.length;
 console.log(`La somme des prix est: ${somme}`);
