@@ -1,12 +1,384 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="testing.css">
-</head>
-<body>
+    <title>Gestion des Réservations</title>
+    <style>
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
 
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: var(--background-color, #fff);
+    color: var(--text-color, #333);
+}
+
+/* Variables pour les thèmes */
+:root {
+    --primary-color: #333;
+    --background-color: #fff;
+    --text-color: #333;
+}
+
+body.dark-theme {
+    --primary-color: #fff;
+    --background-color: #333;
+    --text-color: #fff;
+}
+
+body.blue-theme {
+    --primary-color: #1a237e;
+    --background-color: #e3f2fd;
+    --text-color: #1a237e;
+}
+
+body.red-theme {
+    --primary-color: #b71c1c;
+    --background-color: #ffebee;
+    --text-color: #b71c1c;
+}
+
+body.yellow-theme {
+    --primary-color: #f57f17;
+    --background-color: #fffde7;
+    --text-color: #f57f17;
+}
+
+/* Navigation et sections */
+.header {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.header nav ul li a {
+    color: var(--background-color);
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.header nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Contenu principal */
+main {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: var(--background-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Boutons et formulaires */
+button {
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+form div {
+    margin-bottom: 1rem;
+}
+
+input, select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Tableaux */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 0.8rem;
+    text-align: left;
+}
+
+table th {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: var(--background-color);
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="theme-switcher">
+        <button class="theme-btn" id="light-btn">Clair</button>
+        <button class="theme-btn" id="dark-btn">Sombre</button>
+        <button class="theme-btn" id="blue-btn">Bleu</button>
+        <button class="theme-btn" id="red-btn">Rouge</button>
+        <button class="theme-btn" id="yellow-btn">Jaune</button>
+    </div>
+
+    <header class="header">
+        <h1>Gestion des Réservations</h1>
+        <nav>
+            <ul>
+                <li><a href="#clients-section" class="nav-link">Gestion des Clients</a></li>
+                <li><a href="#reservation-section" class="nav-link">Réserver un Ticket</a></li>
+                <li><a href="#tickets-section" class="nav-link">Tickets Réservés</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Section Gestion des Clients -->
+        <section id="clients-section">
+            <h2>Gestion des Clients</h2>
+            <form id="clientForm">
+                <div>
+                    <label for="nomComplet">Nom Complet :</label>
+                    <input type="text" id="nomComplet" required>
+                </div>
+                <div>
+                    <label for="cin">CIN :</label>
+                    <input type="text" id="cin" required>
+                </div>
+                <div>
+                    <label>Statut :</label>
+                    <input type="radio" name="estEtudiant" value="true" required> Étudiant
+                    <input type="radio" name="estEtudiant" value="false" required> Non Étudiant
+                </div>
+                <button type="submit">Ajouter Client</button>
+            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>CIN</th>
+                        <th>Étudiant</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="clientsTable"></tbody>
+            </table>
+        </section>
+
+        <!-- Section Réserver un Ticket -->
+        <section id="reservation-section">
+            <h2>Réserver un Ticket</h2>
+            <form id="reservationForm">
+                <div>
+                    <label for="clientSelect">Client :</label>
+                    <select id="clientSelect" required></select>
+                </div>
+                <div>
+                    <label for="destination">Destination :</label>
+                    <select id="destination" required>
+                        <option value="rabat">Rabat - 40 DH</option>
+                        <option value="mohammedia">Mohammedia - 20 DH</option>
+                        <option value="marrakech">Marrakech - 150 DH</option>
+                        <option value="tanger">Tanger - 290 DH</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Classe :</label>
+                    <input type="radio" name="classe" value="1" required> 1ère Classe
+                    <input type="radio" name="classe" value="2" required> 2ème Classe
+                </div>
+                <button type="submit">Réserver</button>
+            </form>
+        </section>
+
+        <!-- Section Tickets Réservés -->
+        <section id="tickets-section">
+            <h2>Tickets Réservés</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Client</th>
+                        <th>Étudiant</th>
+                        <th>Destination</th>
+                        <th>Classe</th>
+                        <th>Prix</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody id="ticketsTable"></tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Gestion des Réservations. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+// DOM Elements
+const clientForm = document.getElementById("clientForm");
+const clientsTable = document.getElementById("clientsTable").querySelector("tbody");
+const clientSelect = document.getElementById("clientSelect");
+const reservationForm = document.getElementById("reservationForm");
+const totalPriceSpan = document.getElementById("totalPrice");
+const ticketsTable = document.getElementById("ticketsTable").querySelector("tbody");
+
+// Navigation
+const sections = document.querySelectorAll(".section");
+document.getElementById("showClients").addEventListener("click", () => showSection("clients"));
+document.getElementById("showReservation").addEventListener("click", () => showSection("reservation"));
+document.getElementById("showTickets").addEventListener("click", () => showSection("tickets"));
+
+function showSection(sectionId) {
+  sections.forEach(section => {
+    section.classList.toggle("active", section.id === sectionId);
+  });
+}
+
+// Theme Switching
+const themeButtons = document.querySelectorAll(".theme-btn");
+themeButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    document.documentElement.className = button.id.replace("-btn", "");
+  });
+});
+
+// Add Client
+clientForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const nomComplet = document.getElementById("nomComplet").value.trim();
+  const cin = document.getElementById("cin").value.trim();
+  const estEtudiant = clientForm.querySelector("input[name='estEtudiant']:checked").value === "true";
+
+  if (!nomComplet || !cin) {
+    alert("Veuillez remplir tous les champs !");
+    return;
+  }
+
+  // Add to clients table
+  const row = document.createElement("tr");
+  row.innerHTML = `
+    <td>${nomComplet}</td>
+    <td>${cin}</td>
+    <td>${estEtudiant ? "Oui" : "Non"}</td>
+    <td><button class="delete-client">Supprimer</button></td>
+  `;
+  clientsTable.appendChild(row);
+
+  // Add to client select dropdown
+  const option = document.createElement("option");
+  option.value = cin;
+  option.textContent = nomComplet;
+  clientSelect.appendChild(option);
+
+  // Reset form
+  clientForm.reset();
+});
+
+// Delete Client
+clientsTable.addEventListener("click", (e) => {
+  if (e.target.classList.contains("delete-client")) {
+    const row = e.target.closest("tr");
+    const cin = row.cells[1].textContent;
+
+    // Remove from dropdown
+    const optionToRemove = [...clientSelect.options].find(option => option.value === cin);
+    if (optionToRemove) {
+      optionToRemove.remove();
+    }
+
+    // Remove row
+    row.remove();
+  }
+});
+
+// Update Ticket Price
+reservationForm.addEventListener("change", () => {
+  const destination = document.getElementById("destination").value;
+  const classe = reservationForm.querySelector("input[name='classe']:checked")?.value;
+  const estEtudiant = reservationForm.querySelector("input[name='estEtudiantTicket']:checked")?.value === "true";
+
+  let basePrice = 0;
+  switch (destination) {
+    case "rabat": basePrice = 40; break;
+    case "mohammedia": basePrice = 20; break;
+    case "marrakech": basePrice = 150; break;
+    case "tanger": basePrice = 290; break;
+  }
+
+  if (classe === "1") basePrice *= 1.5; // 50% extra for 1st class
+  if (estEtudiant) basePrice *= 0.8; // 20% discount for students
+
+  totalPriceSpan.textContent = ${basePrice.toFixed(2)} DH;
+});
+
+// Reserve Ticket
+reservationForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const client = clientSelect.options[clientSelect.selectedIndex].textContent;
+  const destination = document.getElementById("destination").selectedOptions[0].textContent;
+  const classe = reservationForm.querySelector("input[name='classe']:checked")?.value === "1" ? "1ère classe" : "2ème classe";
+  const estEtudiant = reservationForm.querySelector("input[name='estEtudiantTicket']:checked")?.value === "true" ? "Oui" : "Non";
+  const prix = totalPriceSpan.textContent;
+
+  // Add to tickets table
+  const row = document.createElement("tr");
+  row.innerHTML = `
+    <td>${client}</td>
+    <td>${estEtudiant}</td>
+    <td>${destination}</td>
+    <td>${classe}</td>
+    <td>${prix}</td>
+    <td>${new Date().toLocaleDateString()}</td>
+  `;
+  ticketsTable.appendChild(row);
+
+  // Reset form
+  reservationForm.reset();
+  totalPriceSpan.textContent = "0 DH";
+});
+    </script>
 </body>
+
 </html>

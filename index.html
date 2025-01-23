@@ -1,11 +1,338 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Gestion Réservations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #2a3b75;
+            color: white;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            margin-top: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #2a3b75;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input[type="text"], input[type="radio"], select, input[type="date"] {
+            padding: 8px;
+            margin: 5px;
+            border-radius: 40px;
+        }
+
+        button {
+            margin-top: 10px;
+            background-color: #2a3b75;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1d2955;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #2a3b75;
+            color: white;
+        }
+
+        .delete-btn {
+            background-color: #d9534f;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background-color: #150fc9;
+        }
+
+        footer {
+            background-color: #2a3b75;
+            color: aliceblue;
+            text-align: center;
+            padding: 30px;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            margin-left: 325px;
+        }
+    </style>
 </head>
 <body>
-    <script src="script.js"></script>
+    <section>
+        <div class="header">
+            <h1>Gestion Réservations</h1>
+            <p>Bienvenue dans notre système de gestion de réservation</p>
+            <ul>
+                <li>Gestion des Clients</li>
+                <li>Réservation de Tickets</li>
+                <li>Affichage de Tickets</li>
+            </ul>
+        </div>
+
+        <div class="container">
+            <h2>Gestion des Clients</h2>
+            <label for="nom">Nom Complet:</label>
+            <input type="text" id="nom" placeholder="Entrez le nom complet">
+
+            <label for="cin">CIN:</label>
+            <input type="text" id="cin" placeholder="Entrez le CIN">
+
+            <label>Étudiant:</label>
+            <br>
+            <input type="radio" name="etudiant" value="Oui"> Oui
+            <input type="radio" name="etudiant" value="Non"> Non
+            <br><br>
+
+            <button onclick="ajouterClient()">Ajouter</button>
+
+            <table id="clientTable">
+                <thead>
+                    <tr>
+                        <th>Nom Complet</th>
+                        <th>CIN</th>
+                        <th>Étudiant</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Clients ajoutés -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <form id="ticketForm" class="container">
+        <h2>Réservation de Tickets</h2>
+
+        <h5 id="villedépart">Ville de départ : Casablanca</h5>
+
+        <label for="villearrivee">Ville d'arrivée :</label>
+        <select name="villearrivee" id="villearrivee" required>
+            <option value="rabat">Rabat - 90DH</option>
+            <option value="tanger">Tanger - 120DH</option>
+            <option value="sale">Sale - 80DH</option>
+            <option value="mohammedia">Mohammedia - 20DH</option>
+        </select>
+        <br>
+
+        <label>Classe :</label>
+        <input type="radio" name="classe" value="1" id="classe1"> 1ère classe
+        <input type="radio" name="classe" value="2" id="classe2"> 2ème classe
+        <br>
+
+        <label>Étudiant :</label>
+        <input type="radio" name="etudiant" value="oui" id="etudiantOui"> Oui
+        <input type="radio" name="etudiant" value="non" id="etudiantNon"> Non
+        <br>
+
+        <label for="date">Date de réservation :</label>
+        <input type="date" id="date" required>
+        <br>
+
+        <button type="button" onclick="calculer()">Calculer</button>
+        <strong>Total :</strong><span id="total">0</span> DH
+
+        <br>
+        <button type="button" onclick="ajouterReservation()">Ajouter Réservation</button>
+    </form>
+    <div class="container">
+    <div id="recapitulatif"></div>
+</div>
+
+    <footer>© 2025 Gestion de Réservations. Tous droits réservés.</footer>
+
+    <script>
+        let clients = [];
+        let tickets = [];
+
+        // Ajouter un client
+        function ajouterClient() {
+            const nom = document.getElementById('nom').value;
+            const cin = document.getElementById('cin').value;
+            const etudiant = document.querySelector('input[name="etudiant"]:checked');
+
+            if (nom && cin && etudiant) {
+                const newClient = { nom, cin, etudiant: etudiant.value };
+                clients.push(newClient);
+
+                // Mettre à jour le tableau des clients
+                const table = document.getElementById('clientTable').querySelector('tbody');
+                const newRow = table.insertRow();
+                newRow.innerHTML = `
+                    <td>${nom}</td>
+                    <td>${cin}</td>
+                    <td>${etudiant.value}</td>
+                    <td><button class="delete-btn" onclick="supprimerLigne(this)">Supprimer</button></td>
+                `;
+
+                // Vider les champs
+                document.getElementById('nom').value = '';
+                document.getElementById('cin').value = '';
+                document.querySelectorAll('input[name="etudiant"]').forEach(radio => radio.checked = false);
+            } else {
+                alert("Veuillez remplir tous les champs !");
+            }
+        }
+
+        // Supprimer un client
+        function supprimerLigne(button) {
+            const row = button.parentElement.parentElement;
+            const cin = row.cells[1].textContent;
+            clients = clients.filter(client => client.cin !== cin);
+            row.remove();
+        }
+
+        // Calculer le prix
+        function calculer() {
+    // Récupérer les valeurs sélectionnées
+    const villeArrivee = document.getElementById('villearrivee').value;
+    const classe = document.querySelector('input[name="classe"]:checked');
+    const etudiant = document.querySelector('input[name="etudiant"]:checked');
+
+    // Définir les prix de base selon la ville d'arrivée
+    let prixDeBase = 0;
+    switch (villeArrivee) {
+        case 'rabat':
+            prixDeBase = 90;
+            break;
+        case 'tanger':
+            prixDeBase = 120;
+            break;
+        case 'sale':
+            prixDeBase = 80;
+            break;
+        case 'mohammedia':
+            prixDeBase = 20;
+            break;
+        default:
+            prixDeBase = 0;
+    }
+
+    // Appliquer la règle de la 1ère classe (multiplication par 2)
+    let prixClasse = prixDeBase;
+    if (classe && classe.value === '1') {
+        prixClasse *= 2;  // Double le prix pour la 1ère classe
+    }
+
+    // Appliquer la réduction de 20 DH pour les étudiants
+    let prixFinal = prixClasse;
+    if (etudiant && etudiant.value === 'oui') {
+        prixFinal -= 20;  // Réduction de 20 DH pour les étudiants
+    }
+
+    // S'assurer que le prix final ne soit pas inférieur à zéro
+    if (prixFinal < 0) {
+        prixFinal = 0;
+    }
+
+    // Afficher le prix total avec deux décimales
+    document.getElementById('total').textContent = prixFinal.toFixed(2);
+}
+
+        // Ajouter une réservation
+        function ajouterReservation() {
+            const villeArrivee = document.getElementById('villearrivee').value;
+            const classe = document.querySelector('input[name="classe"]:checked');
+            const etudiant = document.querySelector('input[name="etudiant"]:checked');
+            const prix = parseFloat(document.getElementById('total').textContent);
+            const date = document.getElementById('date').value;
+
+            if (!classe || !etudiant || prix === 0 || !date) {
+                alert("Veuillez compléter la réservation !");
+                return;
+            }
+
+            const reservation = {
+                client: clients[clients.length - 1], // Dernier client ajouté
+                villeArrivee,
+                classe: classe.value,
+                prix,
+                etudiant: etudiant.value,
+                date
+            };
+
+            tickets.push(reservation);
+
+            // Affichage des tickets
+            const table = document.getElementById('recapitulatif');
+            let ticketHTML = `
+                <h3>Récapitulatif des réservations :</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nom Client</th>
+                            <th>Ville d'arrivée</th>
+                            <th>Classe</th>
+                            <th>Prix</th>
+                            <th>Étudiant</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${tickets.map(ticket => `
+                            <tr>
+                                <td>${ticket.client.nom}</td>
+                                <td>${ticket.villeArrivee}</td>
+                                <td>${ticket.classe === '1' ? '1ère classe' : '2ème classe'}</td>
+                                <td>${ticket.prix} DH</td>
+                                <td>${ticket.etudiant}</td>
+                                <td>${ticket.date}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+            table.innerHTML = ticketHTML;
+        }
+    </script>
 </body>
 </html>
