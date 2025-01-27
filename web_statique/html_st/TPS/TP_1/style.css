@@ -22,6 +22,7 @@ header {
 }
 .bar_list ul li select{
     border: none;
+    outline: none;
     background: none;
 }
 hr {
