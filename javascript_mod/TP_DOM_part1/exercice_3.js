@@ -31,6 +31,7 @@ const modifyColorBtn = document.createElement('button');
 modifyColorBtn.textContent = "Modifier couleur";
 modifyColorBtn.onclick = () => {
     const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+    // or Math.floor(Math.random()*0xFFFFFF)).toString(16)
     element.style.backgroundColor = randomColor;
     element.textContent = `Couleur modifiée ${randomColor}`;
 };
