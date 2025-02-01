@@ -89,6 +89,14 @@ function supprimerContact(id) {
             contacts.splice(index, 1);
             updateTable();
         }
+<<<<<<< HEAD
+=======
+        //  I can do just 
+        //  function supprimerClient(index)
+        //  clients.splice(index, 1);
+        //  updateTable();
+
+>>>>>>> ef26e7afad6444a79b02bd52d4da5b4c04698b42
     }
 }
 
