@@ -89,6 +89,7 @@ function supprimerContact(id) {
             contacts.splice(index, 1);
             updateTable();
         }
+    }
 }
 
 function modifierContact(id) {
@@ -101,6 +102,5 @@ function modifierContact(id) {
         modifierMode = true;
         indexMode = index;
         document.getElementById('sbmbtn').textContent = 'Modifier Contact';
-
     }
 }
