@@ -86,7 +86,6 @@ function supprimerClient(id) {
         }
         //  I can do just 
         //  function supprimerClient(index)
-        //  client = clients[index];
         //  clients.splice(index, 1);
         //  updateTable();
 
