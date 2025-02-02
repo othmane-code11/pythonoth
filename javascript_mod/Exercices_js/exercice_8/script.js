@@ -1,57 +1,32 @@
-// Tableau pour stocker les étudiants
-const etudiants = [];
+let form = document.getElementById('formulaire');
+let etudiants = [];
 
-// Fonction pour afficher la liste des étudiants
-function afficherEtudiants() {
-    const resultatDiv = document.getElementById('resultat');
-    if (!resultatDiv) {
-        const newDiv = document.createElement('div');
-        newDiv.id = 'resultat';
-        document.body.appendChild(newDiv);
-    }
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let nom = document.getElementById('name').value;
+    let age = document.getElementById('age').value;
+    let note = document.getElementById('note').value;
+    
+    let etudiant = {
+        nom,
+        age,
+        note
+    };
+    etudiants.push(etudiant);
+    let resultat = document.getElementById('resultat');
+    resultat.innerHTML = `<h1>La list des etudiants est:</h1>`
 
-    const resultat = document.getElementById('resultat');
-    resultat.innerHTML = `<h2>Liste des Étudiants</h2>`;
-
-    etudiants.forEach((etudiant, index) => {
-        const etudiantDiv = document.createElement('div');
-        etudiantDiv.textContent = `${index + 1} => Nom: ${etudiant.nom}, Age: ${etudiant.age}, Note: ${etudiant.note}`;
-        resultat.appendChild(etudiantDiv);
+    etudiants.forEach((etu, index) => {
+        let list = document.createElement('ul');
+        let titre = document.createElement('h2');
+        titre.innerHTML = `L'etudiant numéro ${index+1}`;
+        list.innerHTML = `
+            <li><strong>le nom :</strong> ${etu.nom}</li>
+            <li><strong>l'age :</strong> ${etu.age}</li>
+            <li><strong>la note :</strong> ${etu.note}</li>
+        `;
+        resultat.appendChild(titre);
+        resultat.appendChild(list);
     });
-}
-
-// Fonction pour ajouter un étudiant
-function ajouterEtudiant(event) {
-    event.preventDefault();
-
-    // Récupérer les valeurs des champs de texte
-    const nom = document.getElementById('name').value;
-    const age = document.getElementById('age').value;
-    const note = document.getElementById('note').value;
-
-    // Vérifier que tous les champs sont remplis
-    if (nom && age && note) {
-        // Créer un objet étudiant
-        const etudiant = {
-            nom: nom,
-            age: parseInt(age),
-            note: parseFloat(note)
-        };
-
-        // Ajouter l'étudiant au tableau
-        etudiants.push(etudiant);
-
-        // Mettre à jour l'affichage
-        afficherEtudiants();
-
-        // Réinitialiser les champs de saisie
-        document.getElementById('name').value = '';
-        document.getElementById('age').value = '';
-        document.getElementById('note').value = '';
-    } else {
-        alert('Veuillez remplir tous les champs !');
-    }
-}
-
-// Ajouter un gestionnaire d'événement au formulaire
-document.getElementById('formulaire').addEventListener('submit', ajouterEtudiant);
+    form.reset();
+});
