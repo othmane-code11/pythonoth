@@ -26,7 +26,11 @@ ul li {
     margin: 10px 20px;
     
 }
-
+header a {
+    color: black;
+    font-size: 13px;
+    font-weight: 500;
+}
 select {
     border: none;
     outline: none;
@@ -51,12 +55,17 @@ button {
 }
 
 .btn {
-    color: black;
     background-color: rgb(19, 163, 163);
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
+
+.btn a {
+    color:aliceblue;
+    font-weight: bold;
+}
+
 .btn:hover {
     background-color: rgb(12, 144, 144);
 }
