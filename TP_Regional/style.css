@@ -1,0 +1,116 @@
+body {
+    line-height: 1.6;
+    margin: 0;
+    font-family:Arial, Helvetica, sans-serif;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header .Logo{
+    display: flex;
+    align-items: center;
+}
+.Logo img {
+    width: 100px;
+    height: 100px;
+}
+nav ul {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    align-items: center;
+}
+ul li {
+    margin: 10px 20px;
+    
+}
+
+select {
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+}
+main {
+    background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7)), url("banner2.jpg");
+    background-size: cover;
+    color: aliceblue;
+    padding: 120px 20px 0 80px;
+    height: 59vh;
+    margin: 0;
+    text-align: left;
+}
+
+
+button {
+    padding: 10px;
+    color: aliceblue;
+    background-color: black;
+}
+
+.btn {
+    color: black;
+    background-color: rgb(19, 163, 163);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn:hover {
+    background-color: rgb(12, 144, 144);
+}
+
+a {
+    text-decoration: none;
+    color: aliceblue;
+    font-weight: bold;
+}
+
+/*login part*/
+.login {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 120px;
+}
+.connecter {
+    display: flex;
+    align-items: center;
+}
+.connecter img {
+    width: 100px;
+}
+.form label {
+    display: block;
+    margin: 20px ;
+}
+.form input {
+    display: block;
+    margin: 20px ;
+    padding: 10px;
+    width: 90%;
+}
+.btn2 {
+    color: black;
+    background-color: rgb(19, 163, 163);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.btn2:hover {
+    background-color: rgb(12, 144, 144);
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 0 30px;
+}
+#footer_link {
+    color: black;
+}
