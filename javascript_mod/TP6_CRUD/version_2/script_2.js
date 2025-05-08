@@ -51,7 +51,7 @@ document.getElementById('form-container').addEventListener('submit', (e) => {
 
     if (modifierMode) {
         contacts[indexMode] = contact;
-        modifierMode = false
+        modifierMode = false;
         indexMode = null;
         document.getElementById('sbmbtn').textContent = 'Ajouter Contact';
 

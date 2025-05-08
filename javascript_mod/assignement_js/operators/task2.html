@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let num = 3;
+
+        // Solution One
+        console.log(num + num); // 6
+
+        // Solution Two
+        let t = true;
+        console.log(num * ++t); // 6
+
+        // Soultion Three
+        console.log(num-- + ++t); // 6
+
+        // Soultion Four
+        console.log(+`${num * t++}`); // 6
+
+        // Solution Five
+        console.log(+`${num++ + t--}`); // 6
+
+        // Solution Six
+        console.log(num + t); // 6
+    </script>
+</body>
+</html>

@@ -1,48 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        
-    </style>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Learn JavaScript</title>
+    </head>
+    <body>
     <script>
-        let form = document.createElement('form');
-        document.body.appendChild(form);
-        let break_line = document.createElement('br');
-        let break_line1 = document.createElement('br');
-        let break_line2 = document.createElement('br');
-        let nom = document.createElement('input');
-        nom.type = 'text';
-
-        nom.placeholder = 'entrez votre nom: ';
-        form.appendChild(nom);
-        form.appendChild(break_line)
-        let email = document.createElement('input');
-        email.placeholder = 'entrez votre email: ';
-        email.type = 'email';
-        form.appendChild(email);
-        form.appendChild(break_line1);
-        let password = document.createElement('input');
-        password.placeholder = 'entrez votre password: ';
-        password.type = 'password';
-        form.appendChild(password);
-        form.appendChild(break_line2);
-        nom.required = 'true';
-        email.required = 'true';
-        password.required = 'true';
-        password.minLength = '8';
-        
-        let sbm = document.createElement('input');
-        sbm.type = 'submit';
-        form.appendChild(sbm);
-
-        let initialize = document.createElement('input');
-        initialize.type = 'reset';
-        form.appendChild(initialize);
+        document.write
+        let theTitle="Elzero", Description="Elzero web school", date="25-10";
+        let div = document.createElement('div');
+        div.innerHTML = `
+            <h3>${theTitle}</h3>
+            <p>${Description}</p>
+            <span>${date}</span>
+        `;
+        document.body.appendChild(div);
     </script>
-</body>
+    </body>
 </html>
