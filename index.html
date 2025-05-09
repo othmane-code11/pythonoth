@@ -7,15 +7,11 @@
     </head>
     <body>
     <script>
-        document.write
-        let theTitle="Elzero", Description="Elzero web school", date="25-10";
-        let div = document.createElement('div');
-        div.innerHTML = `
-            <h3>${theTitle}</h3>
-            <p>${Description}</p>
-            <span>${date}</span>
-        `;
-        document.body.appendChild(div);
+        let arr = [21, 23, 22, 43, 44, 34];
+        let a = arr.filter(function(n) {
+            return n % 2 === 0;
+        });
+        console.table(a);
     </script>
     </body>
 </html>
