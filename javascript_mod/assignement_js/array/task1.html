@@ -11,11 +11,10 @@
         let num = 3;
 
         // Method 1
-        console.log(myFriends.slice(-myFriends.length ,num)); // ["Ahmed", "Elham", "Osama"];
+        console.log(myFriends.reverse().slice(-num).reverse()); // ["Ahmed", "Elham", "Osama"];
 
         // Method 2
-        myFriends.splice(num,1);
-        console.log(myFriends.slice()); // ["Ahmed", "Elham", "Osama"];
+        console.log(myFriends.reverse().slice(num-num,num)); // ["Ahmed", "Elham", "Osama"];
     </script>
 </body>
 </html>
