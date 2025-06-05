@@ -1,124 +1,97 @@
-let btnButtons = document.querySelectorAll('.theme-btn');
-let body = document.body;
-
-btnButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-        let theme = btn.id.replace('btn', 'theme');
-        body.className = theme;
-    });
+window.addEventListener('load', () => { 
+    if (localStorage.getItem("clients")) {
+        clients = JSON.parse(localStorage.getItem('clients'));
+        updateTable();
+    }
 });
 
-let sections = document.querySelectorAll('.section');
-document.getElementById('showClients').addEventListener('click', () => activeClasse("clients"));
-document.getElementById('showReservation').addEventListener('click', () => activeClasse("reservation"));
-document.getElementById('showTickets').addEventListener('click', () => activeClasse("tickets"));
-
-function activeClasse (sec_id) {
-    sections.forEach(section => {
-        section.classList.toggle('active', sec_id === section.id);
-    });
+function sauvgarder() {
+    localStorage.setItem('clients', JSON.stringify("clients"));
 }
 
-let clientForm = document.getElementById('clientForm');
-let clientsTableBody = document.querySelector('#clientsTable tbody');
-let clients = [];
-clientForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    let nomComplet = document.getElementById('nomComplet').value;
-    let cin = document.getElementById('cin').value;
-    let estEtudiant = document.querySelector('input[name="estEtudiant"]:checked').value === 'true';
 
-    if (clients.some(client => client.cin === cin)) {
-        alert('Le cin doit etre unique');
+let clients = [];
+let modifyMode = false;
+let indexModify = null;
+
+let form = document.getElementById('form-container');
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let nom = document.getElementById('nom').value;
+    let email = document.getElementById('email').value;
+    let id = (modifyMode) ? clients[indexModify].id : generated();
+    let isValid = true;
+    let errors = document.querySelectorAll('.errors');
+    errors.forEach(err => {
+        err.textContent = "";
+    });
+
+    let regex = /^[a-zA-Z0-9]+([-_.][a-zA-Z0-9])*@[a-zA-Z0-9]+([-_.][a-zA-Z0-9])*\.[a-zA-Z0-9]{2,6}$/;
+    if (!regex.test(email)) {
+        document.getElementById('email_error').textContent = "L'email invalid";
+        isValid = false;
+    } else if (clients.some(client => client.email === email) && !modifyMode) {
+        document.getElementById('email_error').textContent = "L'email doit etre unique";
+        isValid = false;
+    }
+
+    if (nom.trim() === "") {
+        document.getElementById('nom_error').textContent = "L'email est vide";
+        isValid = false;
+    }
+    if (!isValid) {
         return;
     }
 
-    let newClient = {nomComplet, cin, estEtudiant};
-    clients.push(newClient);
-    updateClientTable();
-    updateClientSelect();
+    let client = {id, nom, email};
+    if (modifyMode) {
+        clients[indexModify] = client;
+        indexModify = null;
+        modifyMode = false;
+        document.getElementById('sbmbtn').textContent = "Ajouter Contact";
+    } else {
+        clients.push(client);
+    }
+    updateTable();
+    // sauvgarder();
+    form.reset();
 });
 
-function updateClientTable(){
-    clientsTableBody.innerHTML = "";
+function generated() {
+    return Math.floor(Math.random() * 100);
+}
+
+let tbody = document.getElementById('contact-table-body');
+function updateTable() {
+    tbody.innerHTML = "";
     clients.forEach((client, index) => {
         let row = document.createElement('tr');
         row.innerHTML = `
-            <td>${client.nomComplet}</td>
-            <td>${client.cin}</td>
-            <td>${client.estEtudiant ? 'Oui' : 'Non'}</td>
-            <td><button onclick="deleteClient(${index})">Supprimer</button></td>
+            <td>${client.id}</td>
+            <td>${client.nom}</td>
+            <td>${client.email}</td>
+            <td>
+                <button onclick="deleteClient(${index})">Supprimer</button>
+                <button onclick="modifyClient(${index})">Modifier</button>
+            </td>
         `;
-        clientsTableBody.appendChild(row);
+        tbody.appendChild(row);
     });
 }
 
 function deleteClient(index) {
-    if (confirm ("are you sure?")) {
+    if (confirm("Etez vous sure?")) {
         clients.splice(index, 1);
-        updateClientTable();
-        updateClientSelect();
+        updateTable();
+        sauvgarder();
     }
 }
 
-let clientSelect = document.getElementById('clientSelect');
-function updateClientSelect() {
-    clientSelect.innerHTML = "";
-    clients.forEach((client, index) => {
-        let opt = document.createElement('option');
-        opt.value = index;
-        opt.textContent = `${client.nomComplet} (${client.cin})`;
-        clientSelect.appendChild(opt);
-    });
+function modifyClient(index) {
+    let client = clients[index];
+    indexModify = index;
+    modifyMode = true;
+    document.getElementById('nom').value = client.nom;
+    document.getElementById('email').value = client.email;
+    document.getElementById('sbmbtn').textContent = "Modifier contact";
 }
-
-let reservationForm = document.getElementById('reservationForm');
-let ticketsTable = document.querySelector('#ticketsTable tbody');
-
-reservationForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    let clientIndex = document.getElementById('clientSelect').selectedIndex;
-    let destination = document.getElementById('destination').value;
-    let classe = document.querySelector('input[name="classe"]:checked').value;
-    let estEtudiant = clients[clientIndex].estEtudiant;
-
-    let prices = {
-        rabat:40,
-        mohammedia:20,
-        marrakech:150,
-        tanger:290
-    }
-
-    let prix = prices[destination] * (estEtudiant ? 0.7 : 1) * (classe === "1" ? 1.5 : 1);
-    document.getElementById('totalPrice').textContent = `le prix total est : ${prix}DH`;
-    let d = new Date;
-    let dFormat = [d.getDate(), d.getMonth()+1, d.getFullYear()].join("/") + ' ' + [d.getHours(), d.getMinutes(), d.getSeconds()].join(':');
-
-    let tickets = {
-        client : clients[clientIndex],
-        destination,
-        classe,
-        date:dFormat,
-        prix
-    }
-    updateClientTickets(tickets);
-});
-
-function updateClientTickets(tickets) {
-    let row = document.createElement('tr');
-    row.innerHTML = `
-        <td>${tickets.client.nomComplet} (${tickets.client.cin.slice(0, 4)}...)</td>
-        <td>${tickets.client.estEtudiant ? 'Oui' : 'Non'}</td>
-        <td>${tickets.destination}</td>
-        <td>${tickets.classe === '1' ? '1ere' : '2eme'}</td>
-        <td>${tickets.prix} DH</td>
-        <td>${tickets.date}</td>
-    `;
-    ticketsTable.appendChild(row);
-}
-
-
-
-
-
-
