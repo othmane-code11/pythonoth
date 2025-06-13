@@ -18,7 +18,7 @@ class Animal:
         self.__numPuce = nmPuce
     
     def afficher_infos(self):
-        return f"Animal: {self._nom}, Âge: {self.age}"
+        return f"Animal: {self.getNom()}, Âge: {self.age}"
 
 class Chien(Animal):
     def __init__(self, nom, age, race):
@@ -39,7 +39,7 @@ class Chat(Animal):
 an = Animal("singe", 12)
 print (an.afficher_infos())
 an.setNumPuce(1232)
-print (an.getNumPuce())
+print (f"Num de puce : {an.getNumPuce()}")
 chien1 = Chien("wiwi", 4, "rott")
 chien2 = Chien("niw", 2, "doberman")
 chat1 = Chat("mimi", 1.5, "siamo")

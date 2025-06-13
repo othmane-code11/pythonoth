@@ -1,40 +1,29 @@
-# Input
-students = {
-  "Ahmed": {
-    "Math": "A",
-    "Science": "D",
-    "Draw": "B",
-    "Sports": "C",
-    "Thinking": "A"
-  },
-  "Sayed": {
-    "Math": "B",
-    "Science": "B",
-    "Draw": "B",
-    "Sports": "D",
-    "Thinking": "A"
-  },
-  "Mahmoud": {
-    "Math": "D",
-    "Science": "A",
-    "Draw": "A",
-    "Sports": "B",
-    "Thinking": "B"
- }
-}
-the_val = {
-    'A' : '100',
-    'B' : '80',
-    'C' : '40',
-    'D' : '20'
-}
+# ----------------------------
+# -- Loop => While Training --
+# -- Simple Password Guess --
+# ----------------------------
 
-for name, modules in students.items():
-    res = 0
-    print('-----------------------------')
-    print(f'-- Student name  => {name}')
-    print('-----------------------------')
-    for mod, val in modules.items() :
-        print(f'- {mod} => {the_val[val]} points')
-        res += int(the_val[val])
-    print(f"total points for {name} is {res}")
+tries = 4
+
+mainPassword = "Osama@123"
+
+inputPassword = input("Write Your Password: ")
+
+while inputPassword != mainPassword:  # True
+
+  tries -= 1  # tries = tries - 1
+
+  if tries == 0:
+
+    print("All Tries Is Finished.")
+
+    break
+  print(f"Wrong Password, { 'Last' if tries == 1 else tries } Chance Left")
+
+  inputPassword = input("Write Your Password: ")
+
+  
+
+else:
+
+  print("Correct Password")
