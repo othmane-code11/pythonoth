@@ -1,8 +1,11 @@
-myNumbers = [1, 2, 3, 5, 7, 10, 13, 14, 15, 19]
-for number in myNumbers:
+word = "wwwwwoooorrrrlllddd"
 
-  if number == 13:
+def cleaning(jomla) :
+    if (len(jomla) == 1) :
+        return jomla
+    elif jomla[0] == jomla[1]:
+        return cleaning(jomla[1:])
+    else :
+        return jomla[0] + cleaning(jomla[1:])
 
-    break
-
-  print(number)
+print(cleaning(word))
