@@ -1,29 +1,41 @@
-# ----------------------------
-# -- Loop => While Training --
-# -- Simple Password Guess --
-# ----------------------------
+# ------------------------
+# -- Built In Functions --
+# ------------------------
+# enumerate()
+# help()
+# reversed()
+# ------------------------
 
-tries = 4
+# enumerate(iterable, start=0)
 
-mainPassword = "Osama@123"
+mySkills = ["Html", "Css", "Js", "PHP"]
 
-inputPassword = input("Write Your Password: ")
+mySkillsWithCounter = enumerate(mySkills, 20)
 
-while inputPassword != mainPassword:  # True
+print(type(mySkillsWithCounter))
 
-  tries -= 1  # tries = tries - 1
+for counter, skill in mySkillsWithCounter:
 
-  if tries == 0:
+  print(f"{counter} - {skill}")
 
-    print("All Tries Is Finished.")
+print("#" * 50)
 
-    break
-  print(f"Wrong Password, { 'Last' if tries == 1 else tries } Chance Left")
+# help()
 
-  inputPassword = input("Write Your Password: ")
+# print(help(print))
 
-  
+print("#" * 50)
 
-else:
+# reversed(iterable)
 
-  print("Correct Password")
+myString = "Elzero"
+
+print(reversed(myString))
+
+for letter in reversed(myString):
+
+  print(letter)
+
+for s in reversed(mySkills):
+
+  print(s)
