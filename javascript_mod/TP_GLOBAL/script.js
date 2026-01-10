@@ -113,8 +113,8 @@ reservationForm.addEventListener('submit', (e) => {
 
   // Ajouter le ticket
   let d = new Date;
-  let dformat = [d.getDate(), d.getMonth()+1, d.getFullYear()].join('/')+' '+
-              [d.getHours(), d.getMinutes(), d.getSeconds()].join(':');
+  let dformat = [String(d.getDate()).padStart(2, 0), String(d.getMonth()+1).padStart(2, 0), d.getFullYear()].join('/')+' '+
+                [String(d.getHours()).padStart(2, 0), String(d.getMinutes()).padStart(2, 0), String(d.getSeconds()).padStart(2, 0)].join(':');
   const ticket = {
     client: clients[clientIndex],
     destination,
