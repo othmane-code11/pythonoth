@@ -1,18 +1,16 @@
-
 // La Gestion des Thèmes Dynamiques
 const themeButtons = document.querySelectorAll('.theme-btn');
 const body = document.body;
 
 themeButtons.forEach((button) => {
   button.addEventListener('click', () => {
-    const theme = button.id.replace('-btn', '-theme');
+    const theme = button.id.replace('btn', 'theme');
     body.className = theme;
   });
 });
 
-// Classe avtive
 const sections = document.querySelectorAll('.section');
-function activeClasse (sectionId) { // sectionId => id du section
+function activeClasse (sectionId) {
   sections.forEach(section => {
     section.classList.toggle('active', section.id === sectionId);
   })
@@ -25,6 +23,8 @@ document.getElementById("showTickets").addEventListener("click", () => activeCla
 const clientForm = document.getElementById('clientForm');
 const clientsTableBody = document.querySelector('#clientsTable tbody');
 const clients = [];
+let modifierMode = false;
+let indexMode = null;
 
 clientForm.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -34,18 +34,25 @@ clientForm.addEventListener('submit', (e) => {
   const estEtudiant = document.querySelector('input[name="estEtudiant"]:checked').value === 'true';
 
   // La Vérification du CIN unique
-  if (clients.some(client => client.cin === cin)) { //The Array.some() method checks if any of the elements in an array pass a test and return booleen
+  if (!modifierMode && clients.some(client => client.cin === cin)) { //The Array.some() method checks if any of the elements in an array pass a test and return booleen
     alert('Le CIN doit être unique.');
     return;
   }
 
-  // Ajouter le client
   const newClient = {
     nomComplet,
     cin, 
     estEtudiant
   };
-  clients.push(newClient);
+  if (modifierMode) {
+    clients[indexMode] = newClient;
+    modifierMode = false;
+    indexMode = null;
+    document.getElementById("saveBtn").textContent = "Ajouter";
+  } else {
+    clients.push(newClient);
+  }
+  
   updateClientsTable();
   updateClientsSelect();
 
@@ -61,10 +68,21 @@ function updateClientsTable() {
       <td>${client.nomComplet}</td>
       <td>${client.cin}</td>
       <td>${(client.estEtudiant) ? 'Oui' : 'Non'}</td>
-      <td><button onclick="deleteClient(${index})">Supprimer</button></td>
+      <td>
+        <button onclick="deleteClient(${index})">Supprimer</button>
+        <button onclick="updateClient(${index})">Modifier</button>
+      </td>
     `;
     clientsTableBody.appendChild(row);
   });
+}
+function updateClient(index) {
+  modifierMode = true;
+  indexMode = index;
+  let client = clients[indexMode];
+  document.getElementById("nomComplet").value = client.nomComplet;
+  document.getElementById("cin").value = client.cin;
+  document.getElementById("saveBtn").textContent = "Modifier";
 }
 
 function deleteClient(index) {
@@ -98,15 +116,14 @@ reservationForm.addEventListener('submit', (e) => {
   const classe = document.querySelector('input[name="classe"]:checked').value;
   const estEtudiant = clients[clientIndex].estEtudiant;
 
-  const prixBase = {
+  const tarif = {
     rabat: 40,
     mohammedia: 20,
     marrakech: 150,
     tanger: 290
   };
 
-  const prixB = prixBase[destination];
-  const prix = prixB * (classe === '1' ? 1.5 : 1) * (estEtudiant ? 0.7 : 1);
+  const prix = tarif[destination] * (classe === '1' ? 1.5 : 1) * (estEtudiant ? 0.7 : 1);
 
   // Remplir le span de totalPrice
   document.getElementById('totalPrice').textContent = `${prix.toFixed(2)} DH😊`
